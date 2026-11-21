@@ -13,7 +13,8 @@ jobs:
 
       - name: Build Nintendo Switch app
         working-directory: NXShigma_Graphic_Starter
-        run: docker run --rm -v "$PWD:/work" -w /work devkitpro/devkita64:latest make
+        run: docker run --rm -v "$PWD:/work" -w /work devkitpro/devkita64:latest bash -lc 'dkp-pacman -S --needed --noconfirm switch-sdl2 switch-sdl2_image switch-sdl2_ttf && make'
+
 
       - uses: actions/upload-artifact@v4
         with:
