@@ -1,0 +1,21 @@
+name: Build NXShigma
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Nintendo Switch app
+        run: docker run --rm -v "$PWD:/work" -w /work devkitpro/devkita64 make
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: NXShigma-build
+          path: "**/*.nro"
+          if-no-files-found: error
