@@ -12,10 +12,12 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build Nintendo Switch app
-        run: docker run --rm -v "$PWD:/work" -w /work devkitpro/devkita64 make
+        working-directory: NXShigma_Graphic_Starter
+        run: docker run --rm -v "$PWD:/work" -w /work devkitpro/devkita64:latest make
 
       - uses: actions/upload-artifact@v4
         with:
           name: NXShigma-build
-          path: "**/*.nro"
+          path: NXShigma_Graphic_Starter/**/*.nro
           if-no-files-found: error
+
